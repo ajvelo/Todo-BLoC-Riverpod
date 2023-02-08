@@ -1,30 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_bloc_riverpod/domain/entities/todo.dart';
-import 'package:todo_bloc_riverpod/presentation/bloc/todo_bloc.dart';
-import 'package:todo_bloc_riverpod/presentation/bloc/todo_event.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_bloc_riverpod/presentation/riverpod/todo_provider.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../domain/entities/todo.dart';
 import '../bloc/todo_state.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomePageRiverpod extends ConsumerStatefulWidget {
+  const HomePageRiverpod({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  HomePageRiverpodState createState() => HomePageRiverpodState();
 }
 
-class _HomePageState extends State<HomePage> {
+class HomePageRiverpodState extends ConsumerState<HomePageRiverpod> {
   final TextEditingController _textFieldController = TextEditingController();
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<TodoBloc>(context).add(GetTodoEvent());
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      print("done");
+      ref.read(todoProvider.notifier).getTodos();
+    });
   }
 
   void _addTodo({required String value}) {
     final todo = Todo(id: const Uuid().v4(), completed: false, title: value);
-    BlocProvider.of<TodoBloc>(context).add(AddTodoEvent(todo: todo));
+    ref.read(todoProvider.notifier).addTodos(todo: todo);
     _textFieldController.clear();
   }
 
@@ -61,10 +63,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final state = ref.watch(todoProvider);
+    print(state);
     return Scaffold(
       appBar: AppBar(title: const Text('Todo List')),
-      body: BlocBuilder<TodoBloc, TodoState>(
-        builder: (context, state) {
+      body: Consumer(
+        builder: (context, ref, child) {
           if (state is TodosLoaded) {
             if (state.todos.isEmpty) {
               return const Center(
@@ -91,8 +95,7 @@ class _HomePageState extends State<HomePage> {
                         ])),
                     onDismissed: (direction) {
                       if (direction == DismissDirection.endToStart) {
-                        BlocProvider.of<TodoBloc>(context)
-                            .add(DeleteTodoEvent(id: todo.id));
+                        ref.read(todoProvider.notifier).deleteTodo(id: todo.id);
                       }
                     },
                     key: Key(todo.id),
@@ -103,8 +106,9 @@ class _HomePageState extends State<HomePage> {
                             ? const Icon(Icons.done)
                             : const Icon(Icons.circle_outlined),
                         onPressed: () {
-                          BlocProvider.of<TodoBloc>(context)
-                              .add(ToggleTodoEvent(id: todo.id));
+                          ref
+                              .read(todoProvider.notifier)
+                              .toggleTodo(id: todo.id);
                         },
                       ),
                     ),
