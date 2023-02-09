@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_bloc_riverpod/presentation/riverpod/todo_provider.dart';
+import 'package:todo_bloc_riverpod/presentation/state_management/riverpod/todo_provider.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../domain/entities/todo.dart';
-import '../todo_state.dart';
+import '../state_management/todo_state.dart';
 
 class HomePageRiverpod extends ConsumerStatefulWidget {
   const HomePageRiverpod({super.key});

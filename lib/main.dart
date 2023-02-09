@@ -10,7 +10,7 @@ import 'package:todo_bloc_riverpod/domain/usecases/add_todo_usecase.dart';
 import 'package:todo_bloc_riverpod/domain/usecases/delete_todo_usecase.dart';
 import 'package:todo_bloc_riverpod/domain/usecases/get_todo_usecase.dart';
 import 'package:todo_bloc_riverpod/domain/usecases/toggle_todo_usecase.dart';
-import 'package:todo_bloc_riverpod/presentation/bloc/todo_bloc.dart';
+import 'package:todo_bloc_riverpod/presentation/state_management/bloc/todo_bloc.dart';
 import 'package:todo_bloc_riverpod/presentation/pages/home_page_bloc.dart';
 import 'package:todo_bloc_riverpod/presentation/pages/home_page_riverpod.dart';
 

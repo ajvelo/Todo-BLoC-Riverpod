@@ -1,4 +1,4 @@
-import '../domain/entities/todo.dart';
+import '../../domain/entities/todo.dart';
 
 abstract class TodoState {}
 
