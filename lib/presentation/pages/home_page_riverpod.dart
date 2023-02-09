@@ -19,7 +19,6 @@ class HomePageRiverpodState extends ConsumerState<HomePageRiverpod> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      print("done");
       ref.read(todoProvider.notifier).getTodos();
     });
   }
@@ -64,7 +63,6 @@ class HomePageRiverpodState extends ConsumerState<HomePageRiverpod> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(todoProvider);
-    print(state);
     return Scaffold(
       appBar: AppBar(title: const Text('Todo List')),
       body: Consumer(

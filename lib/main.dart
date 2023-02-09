@@ -43,6 +43,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
+        // To use the BLoC implementation uncomment the line below and comment the one below that.
+        // home: const HomePageBloc(),
         home: const HomePageRiverpod(),
       ),
     );
