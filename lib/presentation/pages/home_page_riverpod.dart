@@ -4,7 +4,7 @@ import 'package:todo_bloc_riverpod/presentation/riverpod/todo_provider.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../domain/entities/todo.dart';
-import '../bloc/todo_state.dart';
+import '../todo_state.dart';
 
 class HomePageRiverpod extends ConsumerStatefulWidget {
   const HomePageRiverpod({super.key});

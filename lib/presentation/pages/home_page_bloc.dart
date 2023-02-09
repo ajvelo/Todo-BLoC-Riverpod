@@ -5,7 +5,7 @@ import 'package:todo_bloc_riverpod/presentation/bloc/todo_bloc.dart';
 import 'package:todo_bloc_riverpod/presentation/bloc/todo_event.dart';
 import 'package:uuid/uuid.dart';
 
-import '../bloc/todo_state.dart';
+import '../todo_state.dart';
 
 class HomePageBloc extends StatefulWidget {
   const HomePageBloc({super.key});
