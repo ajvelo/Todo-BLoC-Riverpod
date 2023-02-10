@@ -18,7 +18,7 @@ class TodoRepositoryImpl implements TodoRepository {
       final todos = todoModels.map((e) => e.toTodo).toList();
       return todos;
     } on CacheException catch (e) {
-      throw e.message;
+      rethrow;
     } catch (e) {
       throw e.toString();
     }
@@ -32,7 +32,7 @@ class TodoRepositoryImpl implements TodoRepository {
       await localDataSource.saveTodos(todoModels: todoModels);
       return todos;
     } on CacheException catch (e) {
-      throw e.message;
+      rethrow;
     } catch (e) {
       throw e.toString();
     }
@@ -45,7 +45,7 @@ class TodoRepositoryImpl implements TodoRepository {
       final todos = todoModels.map((e) => e.toTodo).toList();
       return todos;
     } on CacheException catch (e) {
-      throw e.message;
+      rethrow;
     } catch (e) {
       throw e.toString();
     }
@@ -58,7 +58,7 @@ class TodoRepositoryImpl implements TodoRepository {
       final todos = todoModels.map((e) => e.toTodo).toList();
       return todos;
     } on CacheException catch (e) {
-      throw e.message;
+      rethrow;
     } catch (e) {
       throw e.toString();
     }

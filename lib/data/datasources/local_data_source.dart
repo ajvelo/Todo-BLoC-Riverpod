@@ -14,28 +14,27 @@ class TodoLocalDataSourceImpl implements TodoLocalDataSource {
 
   TodoLocalDataSourceImpl({required this.hiveHelper});
   @override
-  Future<List<TodoModel>> addTodo({required TodoModel todoModel}) {
-    return hiveHelper.addTodo(todoModel: todoModel);
+  Future<List<TodoModel>> addTodo({required TodoModel todoModel}) async {
+    return await hiveHelper.addTodo(todoModel: todoModel);
   }
 
   @override
   Future<List<TodoModel>> getTodos() async {
-    final todos = await hiveHelper.getTodos();
-    return todos;
+    return await hiveHelper.getTodos();
   }
 
   @override
-  saveTodos({required List<TodoModel> todoModels}) {
-    hiveHelper.saveTodos(todoModels: todoModels);
+  saveTodos({required List<TodoModel> todoModels}) async {
+    await hiveHelper.saveTodos(todoModels: todoModels);
   }
 
   @override
-  Future<List<TodoModel>> toggleTodoAsCompleted({required String id}) {
-    return hiveHelper.toggleTodoAsCompleted(id: id);
+  Future<List<TodoModel>> toggleTodoAsCompleted({required String id}) async {
+    return await hiveHelper.toggleTodoAsCompleted(id: id);
   }
 
   @override
-  Future<List<TodoModel>> deleteTodo({required String id}) {
-    return hiveHelper.deleteTodo(id: id);
+  Future<List<TodoModel>> deleteTodo({required String id}) async {
+    return await hiveHelper.deleteTodo(id: id);
   }
 }
