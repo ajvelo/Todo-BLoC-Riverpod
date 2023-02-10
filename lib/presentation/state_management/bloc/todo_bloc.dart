@@ -6,6 +6,8 @@ import 'package:todo_bloc_riverpod/domain/usecases/toggle_todo_usecase.dart';
 import 'package:todo_bloc_riverpod/presentation/state_management/bloc/todo_event.dart';
 import 'package:todo_bloc_riverpod/presentation/state_management/todo_state.dart';
 
+import '../../../core/exceptions.dart';
+
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
   final GetTodoUsecase getTodoUsecase;
   final AddTodoUsecase addTodoUsecase;
@@ -28,8 +30,8 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     try {
       final todos = await getTodoUsecase.execute();
       emit(TodosLoaded(todos: todos));
-    } on Exception catch (e) {
-      emit(TodosLoadedWithError(message: e.toString()));
+    } on CacheException catch (e) {
+      emit(TodosLoadedWithError(message: e.message));
     } catch (e) {
       emit(TodosLoadedWithError(message: e.toString()));
     }
@@ -40,8 +42,8 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     try {
       final todos = await addTodoUsecase.execute(todo: event.todo);
       emit(TodosLoaded(todos: todos));
-    } on Exception catch (e) {
-      emit(TodosLoadedWithError(message: e.toString()));
+    } on CacheException catch (e) {
+      emit(TodosLoadedWithError(message: e.message));
     } catch (e) {
       emit(TodosLoadedWithError(message: e.toString()));
     }
@@ -52,8 +54,8 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     try {
       final todos = await toggleTodoUsecase.execute(id: event.id);
       emit(TodosLoaded(todos: todos));
-    } on Exception catch (e) {
-      emit(TodosLoadedWithError(message: e.toString()));
+    } on CacheException catch (e) {
+      emit(TodosLoadedWithError(message: e.message));
     } catch (e) {
       emit(TodosLoadedWithError(message: e.toString()));
     }
@@ -64,8 +66,8 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     try {
       final todos = await deleteTodoUsecase.execute(id: event.id);
       emit(TodosLoaded(todos: todos));
-    } on Exception catch (e) {
-      emit(TodosLoadedWithError(message: e.toString()));
+    } on CacheException catch (e) {
+      emit(TodosLoadedWithError(message: e.message));
     } catch (e) {
       emit(TodosLoadedWithError(message: e.toString()));
     }

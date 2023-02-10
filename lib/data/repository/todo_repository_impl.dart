@@ -3,6 +3,8 @@ import 'package:todo_bloc_riverpod/data/models/todo_model.dart';
 import 'package:todo_bloc_riverpod/domain/entities/todo.dart';
 import 'package:todo_bloc_riverpod/domain/repository/repository.dart';
 
+import '../../core/exceptions.dart';
+
 class TodoRepositoryImpl implements TodoRepository {
   final TodoLocalDataSource localDataSource;
 
@@ -15,8 +17,8 @@ class TodoRepositoryImpl implements TodoRepository {
       final todoModels = await localDataSource.addTodo(todoModel: model);
       final todos = todoModels.map((e) => e.toTodo).toList();
       return todos;
-    } on Exception catch (e) {
-      throw e.toString();
+    } on CacheException catch (e) {
+      throw e.message;
     } catch (e) {
       throw e.toString();
     }
@@ -29,8 +31,8 @@ class TodoRepositoryImpl implements TodoRepository {
       final todos = todoModels.map((e) => e.toTodo).toList();
       await localDataSource.saveTodos(todoModels: todoModels);
       return todos;
-    } on Exception catch (e) {
-      throw e.toString();
+    } on CacheException catch (e) {
+      throw e.message;
     } catch (e) {
       throw e.toString();
     }
@@ -42,8 +44,8 @@ class TodoRepositoryImpl implements TodoRepository {
       final todoModels = await localDataSource.toggleTodoAsCompleted(id: id);
       final todos = todoModels.map((e) => e.toTodo).toList();
       return todos;
-    } on Exception catch (e) {
-      throw e.toString();
+    } on CacheException catch (e) {
+      throw e.message;
     } catch (e) {
       throw e.toString();
     }
@@ -55,8 +57,8 @@ class TodoRepositoryImpl implements TodoRepository {
       final todoModels = await localDataSource.deleteTodo(id: id);
       final todos = todoModels.map((e) => e.toTodo).toList();
       return todos;
-    } on Exception catch (e) {
-      throw e.toString();
+    } on CacheException catch (e) {
+      throw e.message;
     } catch (e) {
       throw e.toString();
     }

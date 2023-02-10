@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:todo_bloc_riverpod/core/exceptions.dart';
 import 'package:todo_bloc_riverpod/data/datasources/local_data_source.dart';
 import 'package:todo_bloc_riverpod/data/models/todo_model.dart';
 
@@ -22,7 +23,7 @@ class TodoHiveHelper implements TodoLocalDataSource {
     final box = await Hive.openBox<TodoModel>('todos');
     final model = box.get(id);
     if (model == null) {
-      throw Exception('Item can not be fetched');
+      throw CacheException(message: 'Item can not be fetched');
     } else {
       model.completed = !model.completed;
       box.put(model.id, model);
@@ -44,7 +45,7 @@ class TodoHiveHelper implements TodoLocalDataSource {
     final box = await Hive.openBox<TodoModel>('todos');
     final model = box.get(id);
     if (model == null) {
-      throw Exception('Item can not be fetched');
+      throw CacheException(message: 'Item can not be fetched');
     } else {
       box.delete(id);
       return getTodos();

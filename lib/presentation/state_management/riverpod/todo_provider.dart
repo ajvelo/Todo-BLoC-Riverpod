@@ -8,6 +8,7 @@ import 'package:todo_bloc_riverpod/domain/usecases/get_todo_usecase.dart';
 import 'package:todo_bloc_riverpod/domain/usecases/toggle_todo_usecase.dart';
 import 'package:todo_bloc_riverpod/presentation/state_management/todo_state.dart';
 
+import '../../../core/exceptions.dart';
 import '../../../domain/entities/todo.dart';
 
 final todoProvider = NotifierProvider<TodoNotifier, TodoState>(
@@ -44,8 +45,8 @@ class TodoNotifier extends Notifier<TodoState> {
     try {
       final todos = await getTodoUsecase.execute();
       state = TodosLoaded(todos: todos);
-    } on Exception catch (e) {
-      state = TodosLoadedWithError(message: e.toString());
+    } on CacheException catch (e) {
+      state = TodosLoadedWithError(message: e.message);
     } catch (e) {
       state = TodosLoadedWithError(message: e.toString());
     }
@@ -56,8 +57,8 @@ class TodoNotifier extends Notifier<TodoState> {
     try {
       final todos = await addTodoUsecase.execute(todo: todo);
       state = TodosLoaded(todos: todos);
-    } on Exception catch (e) {
-      state = TodosLoadedWithError(message: e.toString());
+    } on CacheException catch (e) {
+      state = TodosLoadedWithError(message: e.message);
     } catch (e) {
       state = TodosLoadedWithError(message: e.toString());
     }
@@ -68,8 +69,8 @@ class TodoNotifier extends Notifier<TodoState> {
     try {
       final todos = await toggleTodoUsecase.execute(id: id);
       state = TodosLoaded(todos: todos);
-    } on Exception catch (e) {
-      state = TodosLoadedWithError(message: e.toString());
+    } on CacheException catch (e) {
+      state = TodosLoadedWithError(message: e.message);
     } catch (e) {
       state = TodosLoadedWithError(message: e.toString());
     }
@@ -80,8 +81,8 @@ class TodoNotifier extends Notifier<TodoState> {
     try {
       final todos = await deleteTodoUsecase.execute(id: id);
       state = TodosLoaded(todos: todos);
-    } on Exception catch (e) {
-      state = TodosLoadedWithError(message: e.toString());
+    } on CacheException catch (e) {
+      state = TodosLoadedWithError(message: e.message);
     } catch (e) {
       state = TodosLoadedWithError(message: e.toString());
     }
