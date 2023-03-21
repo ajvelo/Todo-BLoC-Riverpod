@@ -11,7 +11,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/ajvelo/Todo-BLoC-Riverpod">
-    <img src="web/icons/Icon-192.png" alt="Logo" width="80" height="80">
+    <img src="assets/images/app_logo.png" alt="App Logo" width="200" height="100">
   </a>
 
   <h3 align="center">TODO with BLoC & Riverpod</h3>
@@ -64,7 +64,7 @@
 
 ### Before We Start
 
-Please read the article here.
+Please read the article [here](https://medium.com/@Andreasv/bloc-vs-riverpod-making-the-right-choice-for-your-flutter-app-5feb4486ac4).
 
 ### Built With
 
@@ -76,12 +76,12 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-1. Follow the Flutter guide on [Get Started](https://docs.flutter.dev/get-started/install) to install the Flutter SDK on your machine. <strong>NOTE</strong> this project is built with Flutter version 2.8.0.
+1. Follow the Flutter guide on [Get Started](https://docs.flutter.dev/get-started/install) to install the Flutter SDK on your machine. <strong>NOTE</strong> this project is built with Flutter version 3.7.7.
 2. Ensure everything is installed correctly by running the command `flutter doctor --verbose` on your terminal.
 
 ### Installation
 
-1. Read the article at [Medium](https://www.swapi.tech/).
+1. Read the article at [Medium](https://medium.com/@Andreasv/bloc-vs-riverpod-making-the-right-choice-for-your-flutter-app-5feb4486ac4).
 2. Clone the repo
    ```sh
    git clone https://github.com/ajvelo/Todo-BLoC-Riverpod.git
